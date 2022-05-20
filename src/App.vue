@@ -41,11 +41,11 @@ export default {
 
   methods: {
     getApi(){
-      console.log(this.apiParams)
       axios.get(this.apiUrl, {
         params: this.apiParams
       })
       .then((res) => {
+        console.log(res);
         this.movieArr = res.data.results;
         this.resultsFound = true; 
         console.log(this.movieArr);
