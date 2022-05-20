@@ -1,61 +1,35 @@
 <template>
-    <div class="card-container">
-        <div class="card-element text-light">
-            <h2>titolo</h2>
-            <h2>titolo originale</h2>
-            <h2>voto</h2>
-            <h2>trama</h2>
-        </div>
-        <div class="card-element text-light">
-            <h2>titolo</h2>
-            <h2>titolo originale</h2>
-            <h2>voto</h2>
-            <h2>trama</h2>
-        </div>
-        <div class="card-element text-light">
-            <h2>titolo</h2>
-            <h2>titolo originale</h2>
-            <h2>voto</h2>
-            <h2>trama</h2>
-        </div>
-        <div class="card-element text-light">
-            <h2>titolo</h2>
-            <h2>titolo originale</h2>
-            <h2>voto</h2>
-            <h2>trama</h2>
-        </div>
-        <div class="card-element text-light">
-            <h2>titolo</h2>
-            <h2>titolo originale</h2>
-            <h2>voto</h2>
-            <h2>trama</h2>
-        </div>
-        <div class="card-element text-light">
-            <h2>titolo</h2>
-            <h2>titolo originale</h2>
-            <h2>voto</h2>
-            <h2>trama</h2>
-        </div>
-       
+    <div class="card-container"
+        v-show="ResultsFound"
+    >
+        <MovieComp 
+            :MovieArr = 'MovieArr'
+        />
+        <!-- <SeriesComp /> -->
     </div>
 </template>
 
 <script>
+import MovieComp from './MovieComp.vue';
+// import SeriesComp from './SeriesComp.vue';
+
 export default {
-    name: 'MainComp'
+    name: 'MainComp',
+    components: {
+        MovieComp,
+        // SeriesComp
+    },
+    props: {
+        ResultsFound: Boolean,
+        MovieArr: Array
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 .card-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    .card-element{
-        min-width: 300px;
-        height: 600px;
-        border: 1px solid white;
-    }
+    padding-top: 30px;
+    width: 80%;
+    margin: 0 auto;
 }
 </style>

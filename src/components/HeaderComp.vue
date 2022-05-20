@@ -1,13 +1,19 @@
 <template>
     <header>
         <div class="head-img">
-            <img src="../assets/img/Netflix-Logo.jpg" alt="">
+            <img src="../assets/img/agoflix.png" alt="">
         </div>
         <div class="input-area">
-            <input type="text" class="form-control input" placeholder="Oggi ho voglia di...">
-            
-            <button class="btn btn-light input-btn">Cerca</button>
-            
+            <input
+                v-model="query"
+                type="text" 
+                class="form-control input" 
+                placeholder="Oggi ho voglia di...">
+
+            <button class="btn btn-light input-btn"
+                @click="movieSearch"
+            >Cerca</button>
+
             <select name="genre" id="movie-genre">
                 <option value="" selected>Select Genre</option>
                 <option value="">MOVIES OR TV</option>
@@ -21,7 +27,18 @@
 
 <script>
 export default {
-    name: 'HeaderComp'
+    name: 'HeaderComp',
+    data(){
+        return{
+            query: ''
+        }
+    },
+    methods: {
+        movieSearch(){
+            console.log( this.query )
+            this.$emit('movieSearch', this.query)
+        }
+    }
 }
 </script>
 
@@ -35,11 +52,7 @@ header{
     width: 100%;
     background-color: black;
     .head-img{
-        width: 200px;
         height: 100%;
-        img{
-            width: 100%;
-        }
     }
     .input-area{
         width: 50%;
