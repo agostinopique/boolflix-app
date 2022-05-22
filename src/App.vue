@@ -47,7 +47,8 @@ export default {
       .then((res) => {
         console.log(res);
         this.movieArr = res.data.results;
-        this.resultsFound = true; 
+        this.resultsFound = true;
+        this.apiParams.query = '';
         console.log(this.movieArr);
       })
       .catch((error) => {

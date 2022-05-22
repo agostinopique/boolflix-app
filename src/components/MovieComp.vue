@@ -28,12 +28,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/style/mixins';
+
 .movie-container h1{
     padding-left: 10px;
 }
 .card-container{
-    display: flex;
+    @include contentCenter;
     flex-wrap: wrap;
-    justify-content: center;
 }
 </style>

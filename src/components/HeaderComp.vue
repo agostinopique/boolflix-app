@@ -36,17 +36,19 @@ export default {
     methods: {
         movieSearch(){
             console.log( this.query )
-            this.$emit('movieSearch', this.query)
+            this.$emit('movieSearch', this.query);
+            this.query = ''
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/style/mixins';
+
 header{
-    display: flex;
+    @include alignCenter();
     justify-content: space-between;
-    align-items: center;
     padding: 0 15px;
     height: 100px;
     width: 100%;
@@ -55,9 +57,8 @@ header{
         height: 100%;
     }
     .input-area{
+        @include alignCenter();
         width: 50%;
-        display: flex; 
-        align-items: center;
 
         #movie-genre{
             margin-left: 10px;

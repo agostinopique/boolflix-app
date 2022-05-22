@@ -23,13 +23,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/style/mixins';
 .series-container h1{
     padding-top: 30px;
     padding-left: 10px;
 }
 .card-container{
-    display: flex;
+    @include contentCenter;
     flex-wrap: wrap;
-    justify-content: center;
 }
 </style>

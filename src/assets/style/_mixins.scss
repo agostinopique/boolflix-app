@@ -1,0 +1,13 @@
+@mixin dFlex(){
+    display: flex;
+}
+
+@mixin contentCenter(){
+    @include dFlex;
+    justify-content: center;
+}
+
+@mixin alignCenter(){
+    @include dFlex;
+    align-items: center;
+}
