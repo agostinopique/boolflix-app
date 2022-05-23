@@ -11,6 +11,8 @@
                 :OrgLang="serie.original_language"
                 :Vote="serie.vote_average"
                 :Overview="serie.overview"
+                :Poster="serie.poster_path"
+
             />
 
         </div>

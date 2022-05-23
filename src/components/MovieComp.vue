@@ -11,6 +11,7 @@
                 :OrgLang="movie.original_language"
                 :Vote="movie.vote_average"
                 :Overview="movie.overview"
+                :Poster="movie.poster_path"
             />
 
         </div>

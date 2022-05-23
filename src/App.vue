@@ -1,3 +1,10 @@
+<!-- 
+  RITOCCHI DA FARE:
+
+  1. ALTERNATIVA DELLA LINGUA SE LA BANDIERINA È
+
+  immagini: object fit
+-->
 <template>
   <div>
     <HeaderComp 
@@ -27,8 +34,8 @@ export default {
 
   data(){
     return {
-      movieUrl: 'https://api.themoviedb.org/3/search/movie',
-      tvUrl: 'https://api.themoviedb.org/3/search/tv',
+      apiUrl: 'https://api.themoviedb.org/3/search/',
+      trendingUrl: ' https://api.themoviedb.org/3/trending/movie/week?api_key=bd3bc2b6fb03fa83d69033826264bb1d',
       
       apiParams:{
         api_key: 'bd3bc2b6fb03fa83d69033826264bb1d',
@@ -47,32 +54,45 @@ export default {
   },
 
   methods: {
-    getApi(apiUrl){
-      axios.get(apiUrl, {
+    getApi(type){
+      axios.get(this.apiUrl + type, {
         params: this.apiParams
       })
+
       .then((res) => {
         console.log(res);
-        if(this.movieArr.length < 1){
+
+        if(type === 'movie'){
+
           this.movieArr = res.data.results;
-        } else {
+
+        } else { 
+
           this.tvArr = res.data.results
+
         }
+
         this.resultsFound = true;
-        this.apiParams.query = '';
+
+        this.apiParams.query = ''; 
+
         console.log('MOVIES',this.movieArr);
         console.log('TVSERIES' ,this.tvArr);
       })
+
       .catch((error) => {
         console.log('ERRORE', error)
       })
     },
 
     queryValue(movie){
+      this.movieArr = [];
+      this.tvArr = []; 
+
       this.apiParams.query = movie;
       console.log('ARRIVATO', this.apiParams.query);
-      this.getApi(this.movieUrl);
-      this.getApi(this.tvUrl);
+      this.getApi('movie');
+      this.getApi('tv');
     }
   }
 }
