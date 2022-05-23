@@ -6,7 +6,11 @@
             <CardComp 
                 v-for="movie in MovieArr"
                 :key="movie.id"
-                :MovieCard="movie"
+                :Title="movie.title"
+                :OrgTitle="movie.original_title"
+                :OrgLang="movie.original_language"
+                :Vote="movie.vote_average"
+                :Overview="movie.overview"
             />
 
         </div>
@@ -34,7 +38,8 @@ export default {
     padding-left: 10px;
 }
 .card-container{
-    @include contentCenter;
+    display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 </style>

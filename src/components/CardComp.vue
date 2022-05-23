@@ -1,30 +1,38 @@
 <template>
-    <!-- <div class="card-element text-light">
-        <h2>titolo</h2>
-        <h2>titolo originale</h2>
-        <h2>voto</h2>
-        <h2>trama</h2>
-    </div> -->
     <div class="card-element">
         <div class="card-content">
             <div class="card-front">
                 <!-- <img src="img_avatar.png" alt="Poster"> -->
             </div>
             <div class="card-back">
-                <h1>{{MovieCard.title}}</h1> 
-                <p>{{MovieCard.original_title}}</p> 
-                <p>{{MovieCard.vote_average}}</p>
-                <p class="overview-movie">{{MovieCard.overview}}</p>
+                <div class="main-info">
+                    <h3>{{Title}}</h3> 
+                    <p>{{OrgTitle}}</p>
+                    <lang-flag :iso="OrgLang" :squared="false" />
+                    <!-- <p>{{MovieCard.original_language}}</p>  -->
+                    <p>{{Vote}}</p>
+                </div>
+                <p class="overview-movie">{{Overview}}</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import LangFlag from '../../node_modules/vue-lang-code-flags';
+
 export default {
     name: 'CardComp',
+    components:{
+        LangFlag
+    },
+
     props:{
-        MovieCard: Object
+        Title: String,
+        OrgTitle: String,
+        OrgLang: String,
+        Vote: Number,
+        Overview: String
     },
 
     methods:{
@@ -40,14 +48,13 @@ export default {
     min-width: 300px;
     height: 400px;
     perspective: 1000px;
-    margin: 5px 5px;
+    margin: 15px;
 }
 
 .card-content {
     position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -74,10 +81,15 @@ export default {
     color: white;
     transform: rotateY(180deg);
     padding: 5px 0 5px 5px;
+    .main-info{
+        height: 50%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
 }
 
 .overview-movie{
-    height: 210px;
+    height: 50%;
     overflow-y: auto;
 }
 </style>

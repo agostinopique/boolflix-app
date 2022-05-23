@@ -5,7 +5,8 @@
         </div>
         <div class="input-area">
             <input
-                v-model="query"
+                v-model.trim="query"
+                @keyup.enter="movieSearch"
                 type="text" 
                 class="form-control input" 
                 placeholder="Oggi ho voglia di...">
@@ -14,13 +15,13 @@
                 @click="movieSearch"
             >Cerca</button>
 
-            <select name="genre" id="movie-genre">
+            <!-- <select name="genre" id="movie-genre">
                 <option value="" selected>Select Genre</option>
                 <option value="">MOVIES OR TV</option>
                 <option value="">MOVIES OR TV</option>
                 <option value="">MOVIES OR TV</option>
                 <option value="">MOVIES OR TV</option>
-            </select>
+            </select> -->
         </div>
     </header>
 </template>
@@ -53,9 +54,6 @@ header{
     height: 100px;
     width: 100%;
     background-color: black;
-    .head-img{
-        height: 100%;
-    }
     .input-area{
         @include alignCenter();
         width: 50%;

@@ -7,6 +7,7 @@
     <MainComp 
       :ResultsFound = 'resultsFound'
       :MovieArr = 'movieArr'
+      :TvArr = 'tvArr'
     />
 
   </div>
@@ -26,7 +27,8 @@ export default {
 
   data(){
     return {
-      apiUrl: 'https://api.themoviedb.org/3/search/movie/?',
+      movieUrl: 'https://api.themoviedb.org/3/search/movie',
+      tvUrl: 'https://api.themoviedb.org/3/search/tv',
       
       apiParams:{
         api_key: 'bd3bc2b6fb03fa83d69033826264bb1d',
@@ -35,21 +37,31 @@ export default {
       },
 
       movieArr: [],
+      tvArr:[],
       resultsFound: false
     }
   },
 
+  mounted:{
+    // getDefaultMovies()
+  },
+
   methods: {
-    getApi(){
-      axios.get(this.apiUrl, {
+    getApi(apiUrl){
+      axios.get(apiUrl, {
         params: this.apiParams
       })
       .then((res) => {
         console.log(res);
-        this.movieArr = res.data.results;
+        if(this.movieArr.length < 1){
+          this.movieArr = res.data.results;
+        } else {
+          this.tvArr = res.data.results
+        }
         this.resultsFound = true;
         this.apiParams.query = '';
-        console.log(this.movieArr);
+        console.log('MOVIES',this.movieArr);
+        console.log('TVSERIES' ,this.tvArr);
       })
       .catch((error) => {
         console.log('ERRORE', error)
@@ -59,7 +71,8 @@ export default {
     queryValue(movie){
       this.apiParams.query = movie;
       console.log('ARRIVATO', this.apiParams.query);
-      this.getApi();
+      this.getApi(this.movieUrl);
+      this.getApi(this.tvUrl);
     }
   }
 }

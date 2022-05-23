@@ -5,23 +5,26 @@
         <MovieComp 
             :MovieArr = 'MovieArr'
         />
-        <!-- <SeriesComp /> -->
+        <SeriesComp 
+            :TvArr = 'TvArr'
+        />
     </div>
 </template>
 
 <script>
 import MovieComp from './MovieComp.vue';
-// import SeriesComp from './SeriesComp.vue';
+import SeriesComp from './SeriesComp.vue';
 
 export default {
     name: 'MainComp',
     components: {
         MovieComp,
-        // SeriesComp
+        SeriesComp
     },
     props: {
         ResultsFound: Boolean,
-        MovieArr: Array
+        MovieArr: Array,
+        TvArr: Array
     }
 }
 </script>

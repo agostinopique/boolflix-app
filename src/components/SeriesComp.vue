@@ -3,9 +3,15 @@
         <h1 class="text-light">Series TV</h1>
         <div class="card-container">
             
-            <CardComp />
-            <CardComp />
-            <CardComp />
+            <CardComp 
+                v-for="serie in TvArr"
+                :key="serie.id"
+                :Title="serie.name"
+                :OrgTitle="serie.original_name"
+                :OrgLang="serie.original_language"
+                :Vote="serie.vote_average"
+                :Overview="serie.overview"
+            />
 
         </div>
     </div>
@@ -18,6 +24,9 @@ export default {
     name: 'SeriesComp',
     components:{
         CardComp
+    },
+    props:{
+        TvArr: Array
     }
 }
 </script>
