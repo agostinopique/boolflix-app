@@ -12,8 +12,8 @@
                 <div class="main-info">
                     <h4>{{Movie.title || Movie.name}}</h4> 
                     <p>{{Movie.original_title || Movie.original_name}}</p>
-                    <lang-flag :iso="Movie.original_language" :squared="false" />
-                    <!--  <p v-else>{{Movie.original_language || Movie.original_language}}</p>  -->
+                    <lang-flag v-if="flags.default.includes(Movie.original_language)" :iso="Movie.original_language" :squared="false" />
+                    <p v-else> Lingua: {{Movie.original_language}}</p> 
                     <div v-if="Movie.vote_average != 0">
                         <p>Voto: {{Movie.vote_average / 2}}</p>
                         <p id="stars" v-html="starsCreation(Movie.vote_average / 2)"></p>
@@ -29,10 +29,17 @@
 <script>
 import LangFlag from '../../node_modules/vue-lang-code-flags';
 
+
 export default {
     name: 'CardComp',
     components:{
-        LangFlag,
+        LangFlag
+    },
+
+    data(){
+        return{
+            flags: require('../assets/script/flag.js')
+        }
     },
 
 
