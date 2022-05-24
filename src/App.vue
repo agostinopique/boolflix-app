@@ -1,18 +1,11 @@
-<!-- 
-  RITOCCHI DA FARE:
-
-  1. ALTERNATIVA DELLA LINGUA SE LA BANDIERINA È
-
-  immagini: object fit
--->
 <template>
   <div>
     <HeaderComp 
       @movieSearch="queryValue"
+      @searchDefault="searchDefault"
     />
 
     <MainComp 
-      :ResultsFound = 'resultsFound'
       :MovieArr = 'movieArr'
       :TvArr = 'tvArr'
     />
@@ -35,7 +28,7 @@ export default {
   data(){
     return {
       apiUrl: 'https://api.themoviedb.org/3/search/',
-      trendingUrl: ' https://api.themoviedb.org/3/trending/movie/week?api_key=bd3bc2b6fb03fa83d69033826264bb1d',
+      trendingUrl: ' https://api.themoviedb.org/3/trending/',
       
       apiParams:{
         api_key: 'bd3bc2b6fb03fa83d69033826264bb1d',
@@ -45,24 +38,24 @@ export default {
 
       movieArr: [],
       tvArr:[],
-      resultsFound: false
     }
   },
 
-  mounted:{
-    // getDefaultMovies()
+  mounted(){
+    this.getApi(this.trendingUrl, 'movie/week')
+    this.getApi(this.trendingUrl, 'tv/week')
   },
 
   methods: {
-    getApi(type){
-      axios.get(this.apiUrl + type, {
+    getApi(url, type){
+      axios.get(url + type, {
         params: this.apiParams
       })
 
       .then((res) => {
         console.log(res);
 
-        if(type === 'movie'){
+        if(type === 'movie' || type === 'movie/week'){
 
           this.movieArr = res.data.results;
 
@@ -71,8 +64,6 @@ export default {
           this.tvArr = res.data.results
 
         }
-
-        this.resultsFound = true;
 
         this.apiParams.query = ''; 
 
@@ -86,13 +77,18 @@ export default {
     },
 
     queryValue(movie){
-      this.movieArr = [];
-      this.tvArr = []; 
+      // this.movieArr = [];
+      // this.tvArr = []; 
 
       this.apiParams.query = movie;
       console.log('ARRIVATO', this.apiParams.query);
-      this.getApi('movie');
-      this.getApi('tv');
+      this.getApi(this.apiUrl,'movie');
+      this.getApi(this.apiUrl,'tv');
+    },
+    
+    searchDefault(){
+      this.getApi(this.trendingUrl, 'movie/week')
+      this.getApi(this.trendingUrl, 'tv/week')
     }
   }
 }

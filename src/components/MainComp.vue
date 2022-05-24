@@ -1,28 +1,25 @@
 <template>
-    <div class="card-container"
-        v-show="ResultsFound"
-    >
-        <MovieComp 
+    <div class="card-container">
+        <MovieComp titleCard="Film"
             :MovieArr = 'MovieArr'
         />
-        <SeriesComp 
-            :TvArr = 'TvArr'
+        <MovieComp titleCard="Serie"
+            :MovieArr = 'TvArr'
         />
     </div>
 </template>
 
 <script>
 import MovieComp from './MovieComp.vue';
-import SeriesComp from './SeriesComp.vue';
+// import SeriesComp from './SeriesComp.vue';
 
 export default {
     name: 'MainComp',
     components: {
         MovieComp,
-        SeriesComp
+        // SeriesComp
     },
     props: {
-        ResultsFound: Boolean,
         MovieArr: Array,
         TvArr: Array
     }

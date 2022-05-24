@@ -2,17 +2,21 @@
     <div class="card-element">
         <div class="card-content">
             <div class="card-front">
-                <img :src="`https://image.tmdb.org/t/p/w342/${Poster}`" :alt="Title">
+                <img v-if="Movie.poster_path != null" :src="`https://image.tmdb.org/t/p/w342/${Movie.poster_path}`" :alt="Movie.title || Movie.name">
+                <span v-else>
+                    <img src="../assets/img/poster_placeholder.jpg" :alt="Movie.title || Movie.name">
+                    <h4 class="alternative-title">{{Movie.title || Movie.name}}</h4>
+                </span>
             </div>
             <div class="card-back">
                 <div class="main-info">
-                    <h3>{{Title}}</h3> 
-                    <p>{{OrgTitle}}</p>
-                    <lang-flag :iso="OrgLang" :squared="false" />
-                    <!-- <p>{{MovieCard.original_language}}</p>  -->
-                    <p id="stars">{{averageVote(Vote)}}</p>
+                    <h4>{{Movie.title || Movie.name}}</h4> 
+                    <p>{{Movie.original_title || Movie.original_name}}</p>
+                    <lang-flag :iso="Movie.original_language" :squared="false" />
+                    <!--  <p v-else>{{Movie.original_language || Movie.original_language}}</p>  -->
+                    <p id="stars">{{averageVote(Movie.vote_average)}}</p>
                 </div>
-                <p class="overview-movie">{{Overview}}</p>
+                <p class="overview-movie">{{Movie.overview}}</p>
             </div>
         </div>
     </div>
@@ -21,27 +25,20 @@
 <script>
 import LangFlag from '../../node_modules/vue-lang-code-flags';
 
-
 export default {
     name: 'CardComp',
     components:{
-        LangFlag
+        LangFlag,
     },
 
 
     props:{
-        Title: String,
-        OrgTitle: String,
-        OrgLang: String,
-        Vote: Number,
-        Overview: String,
-        Poster: String
+        Movie: Object
     },
 
     methods:{
         averageVote(vote){
             let average = vote / 2;
-           
 
             /* for(let i = 0; i >= average; i++){
                 document.getElementById('stars').innerText += 'Suck'
@@ -54,6 +51,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.alternative-title{
+    width: 100%;
+    text-align: center;
+    position: relative;
+    bottom: 150px;
+
+}
 
 .card-element {
     background-color: transparent;
@@ -85,9 +89,9 @@ export default {
 
 .card-front {
     background: rgb(2,0,36);
-    background: linear-gradient(124deg, rgba(2,0,36,1) 10%, rgba(219,40,5,1) 29%, rgba(224,41,5,1) 60%, rgba(15,15,15,1) 92%);
     color: black;
     width: 100%;
+    height: 100%;
     img{
         width: 100%;
         height: 100%;
@@ -98,19 +102,19 @@ export default {
 }
 
 .card-back {
-    background-color: #332f2f;
+    background-color: #332f2f8b;
     color: white;
     transform: rotateY(180deg);
     padding: 5px 0 5px 5px;
     .main-info{
-        height: 50%;
+        max-height: 50%;
         padding: 5px;
         margin-bottom: 10px;
     }
 }
 
 .overview-movie{
-    height: 50%;
+    max-height: 50%;
     overflow-y: auto;
 }
 </style>

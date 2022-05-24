@@ -1,6 +1,6 @@
 <template>
     <header>
-        <div class="head-img">
+        <div class="head-img" @click="$emit('searchDefault')">
             <img src="../assets/img/agoflix.png" alt="">
         </div>
         <div class="input-area">
@@ -15,13 +15,6 @@
                 @click="movieSearch"
             >Cerca</button>
 
-            <!-- <select name="genre" id="movie-genre">
-                <option value="" selected>Select Genre</option>
-                <option value="">MOVIES OR TV</option>
-                <option value="">MOVIES OR TV</option>
-                <option value="">MOVIES OR TV</option>
-                <option value="">MOVIES OR TV</option>
-            </select> -->
         </div>
     </header>
 </template>
@@ -37,7 +30,9 @@ export default {
     methods: {
         movieSearch(){
             console.log( this.query )
-            this.$emit('movieSearch', this.query);
+            if(this.query != ''){
+                this.$emit('movieSearch', this.query);
+            }
             this.query = ''
         }
     }

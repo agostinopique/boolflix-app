@@ -1,20 +1,16 @@
 <template>
     <div class="movie-container">
-        <h1 class="text-light">Film</h1>
-        <div class="card-container">
+        <h1 class="text-light">{{titleCard}}</h1>
+        <div v-if="MovieArr.length > 0" class="card-container">
 
-            <CardComp 
+            <CardComp
                 v-for="movie in MovieArr"
                 :key="movie.id"
-                :Title="movie.title"
-                :OrgTitle="movie.original_title"
-                :OrgLang="movie.original_language"
-                :Vote="movie.vote_average"
-                :Overview="movie.overview"
-                :Poster="movie.poster_path"
+                :Movie="movie"
             />
-
+    
         </div>
+        <h2 v-else class="text-light">Nessun Risultato</h2>
     </div>
 </template>
 
@@ -27,7 +23,8 @@ export default {
         CardComp
     },
     props: {
-        MovieArr: Array
+        MovieArr: Array,
+        titleCard: String
     }
 }
 </script>
@@ -36,6 +33,7 @@ export default {
 @import '../assets/style/mixins';
 
 .movie-container h1{
+    padding-top: 30px;
     padding-left: 10px;
 }
 .card-container{
