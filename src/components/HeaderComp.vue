@@ -61,5 +61,8 @@ header{
             margin: 0 5px;
         }
     }
+    .head-img{
+        cursor: pointer;
+    }
 }
 </style>

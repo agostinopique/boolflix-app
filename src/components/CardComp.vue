@@ -14,7 +14,11 @@
                     <p>{{Movie.original_title || Movie.original_name}}</p>
                     <lang-flag :iso="Movie.original_language" :squared="false" />
                     <!--  <p v-else>{{Movie.original_language || Movie.original_language}}</p>  -->
-                    <p id="stars">{{averageVote(Movie.vote_average)}}</p>
+                    <div v-if="Movie.vote_average != 0">
+                        <p>Voto: {{Math.round(Movie.vote_average / 2)}}</p>
+                        <p id="stars" v-html="starsCreation(Math.round(Movie.vote_average / 2))"></p>
+                    </div>
+                        <p v-else>Voto non disponibile</p>
                 </div>
                 <p class="overview-movie">{{Movie.overview}}</p>
             </div>
@@ -37,15 +41,25 @@ export default {
     },
 
     methods:{
-        averageVote(vote){
-            let average = vote / 2;
+        starsCreation(vote){
+            let stars = '';
+            let i = 0;
+            while(i < vote){
+                stars += `<i class="bi bi-star-fill"></i>`;
+                i++;
+            }
 
-            /* for(let i = 0; i >= average; i++){
-                document.getElementById('stars').innerText += 'Suck'
-            } */
-            return  average = Math.round(average);
+            let empty = 5 - vote;
+            let a = 0;
+            while(a < empty){
+                stars += `<i class="bi bi-star"></i>`;
+                a++;
+            }
+            console.log(typeof stars)
+
+
+            return stars
         }
-
     }
 }
 </script>
