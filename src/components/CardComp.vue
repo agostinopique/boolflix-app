@@ -15,8 +15,8 @@
                     <lang-flag :iso="Movie.original_language" :squared="false" />
                     <!--  <p v-else>{{Movie.original_language || Movie.original_language}}</p>  -->
                     <div v-if="Movie.vote_average != 0">
-                        <p>Voto: {{Math.round(Movie.vote_average / 2)}}</p>
-                        <p id="stars" v-html="starsCreation(Math.round(Movie.vote_average / 2))"></p>
+                        <p>Voto: {{Movie.vote_average / 2}}</p>
+                        <p id="stars" v-html="starsCreation(Movie.vote_average / 2)"></p>
                     </div>
                         <p v-else>Voto non disponibile</p>
                 </div>
@@ -44,13 +44,25 @@ export default {
         starsCreation(vote){
             let stars = '';
             let i = 0;
-            while(i < vote){
+            let decimalNumber = 0;
+            while(i < Math.round(vote)){
+                decimalNumber = parseInt(vote.toString().charAt(2));
+                console.log('Numero decimale', decimalNumber)
                 stars += `<i class="bi bi-star-fill"></i>`;
                 i++;
+                if(decimalNumber >= 5 && i === Math.round(vote - 1)){
+                    stars += `<i class="bi bi-star-half"></i>`;
+                    i++;
+                }
             }
 
-            let empty = 5 - vote;
+            let empty = 0;
             let a = 0;
+            if(decimalNumber >= 5){
+                empty = 5 - Math.ceil(vote)
+            } else {
+                empty = 5 - Math.floor(vote)
+            }
             while(a < empty){
                 stars += `<i class="bi bi-star"></i>`;
                 a++;
