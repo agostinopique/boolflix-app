@@ -55,10 +55,12 @@ export default {
             while(i < Math.round(vote)){
                 decimalNumber = parseInt(vote.toString().charAt(2));
                 console.log('Numero decimale', decimalNumber)
-                stars += `<i class="bi bi-star-fill"></i>`;
+                stars += `<i class="fa-solid fa-star"></i>`;
+                // stars += `<i class="bi bi-star-fill"></i>`;
                 i++;
                 if(decimalNumber >= 5 && i === Math.round(vote - 1)){
-                    stars += `<i class="bi bi-star-half"></i>`;
+                    stars += `<i class="fa-regular fa-star-half-stroke"></i>`;
+                    // stars += `<i class="bi bi-star-half"></i>`;
                     i++;
                 }
             }
@@ -71,7 +73,8 @@ export default {
                 empty = 5 - Math.floor(vote)
             }
             while(a < empty){
-                stars += `<i class="bi bi-star"></i>`;
+                stars += `<i class="fa-regular fa-star"></i>`;
+                // stars += `<i class="bi bi-star"></i>`;
                 a++;
             }
             console.log(typeof stars)

@@ -103,6 +103,7 @@ export default {
 
 <style lang="scss">
   @import './assets/style/general';
+  @import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
 .loading{
   height: 100vh;
