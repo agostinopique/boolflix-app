@@ -15,7 +15,8 @@
                     <lang-flag v-if="flags.default.includes(Movie.original_language)" :iso="Movie.original_language" :squared="false" />
                     <p v-else> Lingua: {{Movie.original_language}}</p> 
                     <div v-if="Movie.vote_average != 0">
-                        <p>Voto: {{Movie.vote_average / 2}}</p>
+                        <p>Voto: {{(Movie.vote_average / 2).toFixed(1)}}</p>
+                        <!-- PER LE STELLE SI POTEVA AGGIUNGERE LE CLASSI ALLE ICONE DELLE STELLE DI BOOTSTRAP (LA CASSE FA-STAR È COMUNE A TUTTE, CAMBIA SOLO LA SECONDA CLASSE IN BASE A SE È PIENA O VUOTA) FACENDO CICLARE IL TAG DELLA STELLA CON UN V-FOR='I IN 5' AGGIUNGENDO POI UNA CLASSE DINAMICA :CLASS CON UNA CONDIZIONE PER IL QUALE SE I <= VOTO LA STELLA ERA PIENA : ALTRIMENTI È VUOTE -->
                         <p id="stars" v-html="starsCreation(Movie.vote_average / 2)"></p>
                     </div>
                         <p v-else>Voto non disponibile</p>
@@ -59,7 +60,7 @@ export default {
                 // stars += `<i class="bi bi-star-fill"></i>`;
                 i++;
                 if(decimalNumber >= 5 && i === Math.round(vote - 1)){
-                    stars += `<i class="fa-regular fa-star-half-stroke"></i>`;
+                    stars += `<i class="fa-regular fa-star-half-stroke fa-star"></i>`;
                     // stars += `<i class="bi bi-star-half"></i>`;
                     i++;
                 }
@@ -109,7 +110,7 @@ export default {
     height: 100%;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 0px 12px 0 rgba(255, 255, 255, 0.2);
 }
 
 .card-element:hover .card-content {
@@ -153,4 +154,5 @@ export default {
     max-height: 50%;
     overflow-y: auto;
 }
+
 </style>
